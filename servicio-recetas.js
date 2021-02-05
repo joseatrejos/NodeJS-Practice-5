@@ -1,0 +1,39 @@
+const server = require('fastify')();
+const HOST = process.env.HOST || '127.0.0.1';
+const PORT = process.env.PORT || 4000;
+
+console.log(`Proceso pid=${process.pid}`);
+
+// http://localhost:4000/recetas/42
+server.get('/recetas/:id', async (request, response) => {
+    console.log(`Proceso de atención de solicitud pid=${process.pid}`);
+    const id = Number(request.params.id);
+    if(id !== 42){
+        response.statusCode = 404;
+        return { error : "No se encontró la receta" }
+    }
+    return {
+        pid : process.pid,
+        receta: {
+            id,
+            nombre : 'Tacos de pollo',
+            pasos : "Agarra la tortilla y ponle pollito",
+            ingredientes: [
+                {
+                    id: 1,
+                    nombre: "Tortilla",
+                    cantidad: "2 unidades"
+                },
+                {
+                    id: 2,
+                    nombre: "Pollo",
+                    cantidad: "80 gr"
+                }
+            ]
+        }
+    }
+});
+
+server.listen(PORT, HOST, () => {
+    console.log(`Servidor ejecutandose en http://${HOST}:${PORT}`);
+});
