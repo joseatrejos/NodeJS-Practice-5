@@ -11,8 +11,6 @@ const PORT = process.env.PORT || 4000;
 
 console.log(`Proceso pid=${process.pid}`);
 
-// openssl req -nodes -new -x509 -keyout tls/llave-privada.key -out shared/tls/certificado-publico.cert
-
 // http://localhost:4000/recetas/42
 server.get('/recetas/:id', async (request, response) => {
     console.log(`Proceso de atención de solicitud pid=${process.pid}`);

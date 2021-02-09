@@ -1,0 +1,3 @@
+Para crear el certificado de seguridad:
+
+openssl req -nodes -new -x509 -keyout tls/llave-privada.key -out shared/tls/certificado-publico.cert
