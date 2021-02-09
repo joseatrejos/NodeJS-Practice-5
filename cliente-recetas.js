@@ -5,7 +5,7 @@ const fs = require("fs");
 
 const HOST = "127.0.0.1";
 const PORT = process.env.PORT || 3000;
-const TARGET = process.env.TARGET || "localhost:4000";
+const TARGET = process.env.TARGET || "recetas:4000";
 
 const opciones = {
     agent: new https.Agent({
