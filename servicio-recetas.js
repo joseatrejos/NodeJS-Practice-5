@@ -1,8 +1,17 @@
-const server = require('fastify')();
+const fs = require('fs');
+const server = require('fastify')({
+    https : {
+        key : fs.readFileSync(__dirname + "/tls/llave-privada.key"),
+        cert : fs.readFileSync(__dirname + "/shared/tls/certificado-publico.cert")
+    }
+});
+
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || 4000;
 
 console.log(`Proceso pid=${process.pid}`);
+
+// openssl req -nodes -new -x509 -keyout tls/llave-privada.key -out shared/tls/certificado-publico.cert
 
 // http://localhost:4000/recetas/42
 server.get('/recetas/:id', async (request, response) => {
